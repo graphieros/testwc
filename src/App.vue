@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div
+      v-if="sticker"
       @click="isModal = !isModal"
       class="sticker"
       :class="`sticker__${orientationClass}`"
@@ -19,35 +20,57 @@
 export default {
   name: "App",
   props: {
+    // bg-color: background color of the sticker. Defaults to white
     bgColor: {
       type: String,
-      default: "",
+      default: "white",
     },
+    // color: text color of the background. Defaults to black
     color: {
       type: String,
-      default: "",
+      default: "black",
     },
+    // sticker: shows a fixed sticker on the screen side. Defaults to false
+    sticker: {
+      type: Boolean,
+      default: false,
+    },
+    // orientation: br, tr, bl, tl. Defaults to bottom right
     orientation: {
       type: String,
       default: "br",
     },
+    // position-bottom: distance to bottom of page in % or px. Defaults to nothing
     positionBottom: {
       type: String, //px % ""
       default: "",
     },
+    // position-top: distance to top of page in % or px. Defaults to nothing
     positionTop: {
       type: String, //px % ""
       default: "",
     },
+    // study-id: client id to pass to the component
     studyId: {
       type: String,
       default: "",
+    },
+    // trigger: opens modal when user's mouse leaves window at the top, defaults to once (once, always, none)
+    trigger: {
+      type: String,
+      default: "none",
+    },
+    // trigger-delay: sets the time after which the components starts watching the user's mouse position. Defaults to 5000ms (5s)
+    triggerDelay: {
+      type: String,
+      default: "5000",
     },
   },
   data() {
     return {
       isModal: false,
       surveyData: {},
+      canTrigger: true,
     };
   },
   computed: {
@@ -71,12 +94,36 @@ export default {
     },
   },
   components: {},
+  methods: {
+    lockTrigger() {
+      this.canTrigger = false;
+    },
+  },
+  created() {
+    setTimeout(() => {
+      if (this.trigger === "always") {
+        document.addEventListener("mousemove", (e) => {
+          if (e.clientY < 3) {
+            this.isModal = true;
+          }
+        });
+      } else if (this.trigger === "once") {
+        document.addEventListener("mousemove", (e) => {
+          if (this.canTrigger && e.clientY < 3) {
+            this.isModal = true;
+            this.lockTrigger();
+          }
+        });
+      }
+    }, this.triggerDelay);
+  },
 };
 </script>
 
 <style lang="scss">
 #app,
 :host {
+  font-family: "Roboto", sans-serif;
   position: relative;
   z-index: 214748364;
 }
@@ -86,13 +133,15 @@ export default {
   border-radius: 3px;
   bottom: 100px;
   box-shadow: 0 10px 20px -10px grey;
+  cursor: pointer;
   display: flex;
-  height: 100px;
+  height: fit-content;
   justify-content: center;
+  padding: 8px;
   position: fixed;
   right: 0;
   user-select: none;
-  width: 50px;
+  width: fit-content;
   &__br,
   &__bl {
     bottom: 100px;
@@ -111,8 +160,11 @@ export default {
   }
   &__span {
     color: inherit;
-    text-orientation: mixed;
-    writing-mode: vertical-lr;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    white-space: nowrap;
+    display: inline-block;
+    overflow: visible;
   }
 }
 .modal {
