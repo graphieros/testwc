@@ -43,9 +43,9 @@
 </template>
 
 <script>
-// loading state
-// getting user information
-// survey data
+// TODO: loading state
+// TODO: get user information
+// TODO: store survey data
 import Button from "./components/Button.vue";
 import IconClose from "./components/IconClose.vue";
 import Stars from "./components/Stars.vue";
@@ -67,11 +67,6 @@ export default {
       type: String,
       default: "black",
     },
-    // sticker: shows a fixed sticker on the screen side. Defaults to false
-    sticker: {
-      type: Boolean,
-      default: false,
-    },
     // orientation: br, tr, bl, tl. Defaults to bottom right
     orientation: {
       type: String,
@@ -87,10 +82,17 @@ export default {
       type: String, //px % ""
       default: "",
     },
+    // stars-number: customize number of stars. Defaults to 5
     starsNumber: {
       type: Number,
       default: 5,
     },
+    // sticker: shows a fixed sticker on the screen side. Defaults to false
+    sticker: {
+      type: Boolean,
+      default: false,
+    },
+    // sticker-text: text of the sticker. Defaults to "Click me"
     stickerText: {
       type: String,
       default: "Click me",
@@ -217,11 +219,11 @@ export default {
   }
   &__span {
     color: inherit;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    white-space: nowrap;
     display: inline-block;
     overflow: visible;
+    transform: rotate(180deg);
+    white-space: nowrap;
+    writing-mode: vertical-rl;
   }
 }
 .modal {
@@ -247,8 +249,8 @@ export default {
     width: 100%;
   }
   &__rating-stars {
-    width: 100%;
     display: block;
+    width: 100%;
   }
 }
 .overlay {
