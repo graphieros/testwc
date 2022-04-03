@@ -1,20 +1,44 @@
 <template>
   <div id="app">
     <div
-      v-if="sticker"
-      @click="isModal = !isModal"
+      v-if="isSticker"
+      @click="showModal()"
       class="sticker"
       :class="`sticker__${orientationClass}`"
       :style="customStyle"
     >
-      <span class="sticker__span"> CLICK ME </span>
+      <span class="sticker__span">{{ stickerText }}</span>
     </div>
     <div class="modal" v-if="isModal">
+      <Button
+        @click="isModal = !isModal"
+        :fab="true"
+        :fixed="true"
+        :right="true"
+        :top="true"
+      >
+        <IconClose />
+      </Button>
+
       <div class="modal__rating-stars">
-        <Stars @rate="saveRating" />
+        <Stars :size="starsNumber" @rate="saveRating" />
       </div>
-      <div class="modal__rating-result">Your rating: {{ userRating }} / 5</div>
+      <div class="modal__rating-result">
+        Your rating: {{ userRating }} / {{ starsNumber }}
+      </div>
+      <div class="modal__actions">
+        <Button
+          :big="true"
+          background="blue"
+          color="white"
+          @click="postSurvey()"
+        >
+          Envoyer
+        </Button>
+      </div>
     </div>
+
+    <div class="overlay" v-if="isModal"></div>
   </div>
 </template>
 
@@ -22,10 +46,14 @@
 // loading state
 // getting user information
 // survey data
+import Button from "./components/Button.vue";
+import IconClose from "./components/IconClose.vue";
 import Stars from "./components/Stars.vue";
 export default {
   name: "App",
   components: {
+    Button,
+    IconClose,
     Stars,
   },
   props: {
@@ -59,6 +87,14 @@ export default {
       type: String, //px % ""
       default: "",
     },
+    starsNumber: {
+      type: Number,
+      default: 5,
+    },
+    stickerText: {
+      type: String,
+      default: "Click me",
+    },
     // study-id: client id to pass to the component
     studyId: {
       type: String,
@@ -78,6 +114,7 @@ export default {
   data() {
     return {
       isModal: false,
+      isSticker: this.sticker,
       surveyData: {},
       canTrigger: true,
       userRating: 0,
@@ -107,8 +144,16 @@ export default {
     lockTrigger() {
       this.canTrigger = false;
     },
+    postSurvey() {
+      // retrieve all gatehred data in proper format and post to db.
+      console.log("POSTING DATA...");
+    },
     saveRating(rating) {
       this.userRating = rating;
+    },
+    showModal() {
+      this.isModal = !this.isModal;
+      this.isSticker = false;
     },
   },
   created() {
@@ -183,8 +228,9 @@ export default {
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 10px 20px -10px grey;
-  height: 300px;
   left: 50%;
+  min-height: 300px;
+  min-width: 400px;
   overflow-x: hidden;
   overflow-y: auto;
   padding: 16px;
@@ -192,8 +238,9 @@ export default {
   right: initial;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 400px;
-  &__rating-result {
+  z-index: 1;
+  &__rating-result,
+  &__actions {
     align-items: center;
     display: flex;
     justify-content: center;
@@ -203,5 +250,15 @@ export default {
     width: 100%;
     display: block;
   }
+}
+.overlay {
+  background: rgba(0, 0, 0, 0.3);
+  display: block;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 0;
 }
 </style>
