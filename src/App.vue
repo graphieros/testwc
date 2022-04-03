@@ -9,7 +9,12 @@
     >
       <span class="sticker__span"> CLICK ME </span>
     </div>
-    <div class="modal" v-show="isModal">Cient Id: {{ studyId }}</div>
+    <div class="modal" v-if="isModal">
+      <div class="modal__rating-stars">
+        <Stars @rate="saveRating" />
+      </div>
+      <div class="modal__rating-result">Your rating: {{ userRating }} / 5</div>
+    </div>
   </div>
 </template>
 
@@ -17,8 +22,12 @@
 // loading state
 // getting user information
 // survey data
+import Stars from "./components/Stars.vue";
 export default {
   name: "App",
+  components: {
+    Stars,
+  },
   props: {
     // bg-color: background color of the sticker. Defaults to white
     bgColor: {
@@ -71,6 +80,7 @@ export default {
       isModal: false,
       surveyData: {},
       canTrigger: true,
+      userRating: 0,
     };
   },
   computed: {
@@ -93,10 +103,12 @@ export default {
       };
     },
   },
-  components: {},
   methods: {
     lockTrigger() {
       this.canTrigger = false;
+    },
+    saveRating(rating) {
+      this.userRating = rating;
     },
   },
   created() {
@@ -168,13 +180,10 @@ export default {
   }
 }
 .modal {
-  align-items: center;
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 10px 20px -10px grey;
-  display: flex;
   height: 300px;
-  justify-content: center;
   left: 50%;
   overflow-x: hidden;
   overflow-y: auto;
@@ -184,5 +193,15 @@ export default {
   top: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
+  &__rating-result {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  &__rating-stars {
+    width: 100%;
+    display: block;
+  }
 }
 </style>
