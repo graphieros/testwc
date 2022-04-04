@@ -23,9 +23,16 @@
       <div class="modal__rating-stars">
         <Stars :size="starsNumber" @rate="saveRating" />
       </div>
+
       <div class="modal__rating-result">
         Your rating: {{ userRating }} / {{ starsNumber }}
       </div>
+
+      <div class="modal__input">
+        <label for="comment">Vos commentaires:</label>
+        <textarea name="comment" v-model="comment"></textarea>
+      </div>
+
       <div class="modal__actions">
         <Button
           :big="true"
@@ -115,10 +122,11 @@ export default {
   },
   data() {
     return {
+      canTrigger: true,
+      comment: "",
       isModal: false,
       isSticker: this.sticker,
       surveyData: {},
-      canTrigger: true,
       userRating: 0,
     };
   },
@@ -196,7 +204,7 @@ export default {
   display: flex;
   height: fit-content;
   justify-content: center;
-  padding: 8px;
+  padding: 16px 8px;
   position: fixed;
   right: 0;
   user-select: none;
@@ -232,10 +240,10 @@ export default {
   box-shadow: 0 10px 20px -10px grey;
   left: 50%;
   min-height: 300px;
-  min-width: 400px;
+  width: fit-content;
   overflow-x: hidden;
   overflow-y: auto;
-  padding: 16px;
+  padding: 32px;
   position: fixed;
   right: initial;
   top: 50%;
@@ -252,6 +260,41 @@ export default {
     display: block;
     width: 100%;
   }
+  &__input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 32px 0;
+    input,
+    label {
+      width: 100%;
+    }
+    label {
+      margin-bottom: 8px;
+    }
+    input,
+    textarea {
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-family: Roboto, sans-serif;
+      font-size: 1rem;
+      max-width: 60ch;
+    }
+    input {
+      height: 44px;
+      padding: 0px 8px;
+    }
+    textarea {
+      min-height: 100px;
+      max-height: 200px;
+      min-width: 30ch;
+      padding: 8px;
+      &:focus {
+        border: 1px solid blue;
+        outline: none;
+      }
+    }
+  }
 }
 .overlay {
   background: rgba(0, 0, 0, 0.3);
@@ -262,5 +305,16 @@ export default {
   top: 0;
   width: 100vw;
   z-index: 0;
+}
+
+@media screen and(max-width: 600px) {
+  .modal {
+    &__input {
+      label,
+      textarea {
+        min-width: none;
+      }
+    }
+  }
 }
 </style>
