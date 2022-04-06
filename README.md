@@ -13,6 +13,12 @@ npm run build -- --target
 wc --inline-vue --name modal-test
 ```
 
+### Include in the head of the Html file
+
+```
+<script defer src="modal-test.min.js"></script>
+```
+
 ### Add to the top of the .min.js file
 
 ```
