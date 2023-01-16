@@ -1,15 +1,35 @@
 {
-  "name": "testwc",
-  "version": "0.1.0",
-  "private": true,
+  "name": "wc-svg-annotator",
+  "version": "0.1.8",
+  "description": "A web component you can use to select and annotate any web content",
+  "author": {
+    "name": "Alec Lloyd Probert"
+  },
+  "license": "MIT",
+  "keywords": [
+    "web component",
+    "annotator",
+    "svg annotator",
+    "svg",
+    "annotation",
+    "data annotation"
+  ],
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
+  "main": "./dist/svg-annotator.js",
+  "files": [
+    "dist/*"
+  ],
   "dependencies": {
     "core-js": "^3.6.5",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
+    "svg-annotator": "^0.4.2",
     "vue": "^2.6.11"
   },
   "devDependencies": {
