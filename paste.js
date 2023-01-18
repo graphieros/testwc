@@ -70,6 +70,11 @@ const myComponentAttributes = [
     enbaled: true,
   },
   {
+    key: "translationHdPrint",
+    value: "hd print",
+    enbaled: true,
+  },
+  {
     key: "translationThickness",
     value: "Thickness",
     enbaled: true,

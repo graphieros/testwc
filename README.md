@@ -16,6 +16,8 @@ Annotation tools:
 - add text (includes bullet points mode)
 - select, move, resize, copy paste, delete, group & ungroup, redo shapes
 - save to pdf (uses html2canvas & jspdf as dependencies)
+- choose printing orientation
+- choose hd or low def print
 
 ## Project setup
 
@@ -47,6 +49,7 @@ Place the web component on the desired page:
 | translation-color-alpha | Label for the color alpha slider input | "Color alpha" | - |
 | translation-dashed-lines | Label for the dashed lines checkbox | "Dashed lines" | - |
 | translation-filled | Label for the filled shape checkbox | "Filled" | - |
+| translation-hd-print | Label for the hd print checkbox | "hd print" | - |
 | translation-font-size | Label for the font size input | "Font size" | - |
 | translation-thickness | Label for the line thickness input | "Thickness" | - |
 | translation-title | Title of the annotator summary | "Annotations" | - |
@@ -80,6 +83,7 @@ If you don't add props, these will be used by default:
     translation-dashed-lines="Dashed lines"
     translation-filled="Filled"
     translation-font-size="Font size"
+    translation-hd-print="hd print"
     translation-thickness="Thickness"
     translation-title="Annotations"
     translation-tooltip-group="Select & Group"

@@ -1,9 +1,13 @@
 {
   "name": "wc-svg-annotator",
-  "version": "0.1.8",
+  "version": "0.2.0",
   "description": "A web component you can use to select and annotate any web content",
   "author": {
     "name": "Alec Lloyd Probert"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/graphieros/testwc"
   },
   "license": "MIT",
   "keywords": [
@@ -29,7 +33,7 @@
     "core-js": "^3.6.5",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
-    "svg-annotator": "^0.4.2",
+    "svg-annotator": "^0.4.3",
     "vue": "^2.6.11"
   },
   "devDependencies": {

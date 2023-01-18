@@ -130,6 +130,10 @@ export default {
         type: String,
         default: "Font size"
       },
+      translationHdPrint: {
+        type: String,
+        default: "hd print"
+      },
       translationThickness: {
         type: String,
         default: "Thickness"
@@ -205,6 +209,7 @@ export default {
               dashedLines: this.translationDashedLines,
               filled: this.translationFilled,
               fontSize: this.translationFontSize,
+              hdPrint: this.translationHdPrint,
               thickness: this.translationThickness,
               title: this.translationTitle,
               tooltipGroup: this.translationTooltipGroup,
@@ -239,7 +244,7 @@ export default {
                 this.croppedCanvas = document.createElement("canvas");
                 this.croppedCanvas.height = this.selectionHeight;
                 this.croppedCanvas.width = this.selectionWidth;
-                this.croppedCanvas.getContext("2d").putImageData(imageData, 0, 0);
+                this.croppedCanvas.getContext("2d", {willReadFrequently: true}).putImageData(imageData, 0, 0);
                 selectionContent.innerHTML = "";
                 selectionContent.appendChild(this.croppedCanvas);
             }).finally(() => {
@@ -650,5 +655,24 @@ summary {
   * {
     box-shadow: none !important;
   }
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px 0 0 0;
 }
 </style>
