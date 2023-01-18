@@ -1,6 +1,6 @@
 {
   "name": "wc-svg-annotator",
-  "version": "0.2.0",
+  "version": "0.2.3",
   "description": "A web component you can use to select and annotate any web content",
   "author": {
     "name": "Alec Lloyd Probert"

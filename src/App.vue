@@ -232,6 +232,7 @@ export default {
     methods: {
         captureSelection() {
             const selectionContent = this.$refs.selectionContent;
+            const scrollBarWidth = window.innerWidth - document.body.offsetWidth;
             let offsetY = 0;
             html2canvas(document.body, {
                 allowTaint: true,
@@ -240,10 +241,10 @@ export default {
                 scrollX: window.pageXOffset,
                 scrollY: window.pageYOffset,
             }).then((canvas) => {
-                const imageData = canvas.getContext("2d", {willReadFrequently: true}).getImageData(this.startX, this.startY - offsetY, this.selectionWidth, this.selectionHeight);
+                const imageData = canvas.getContext("2d", {willReadFrequently: true}).getImageData(this.startX, this.startY - offsetY, this.selectionWidth + scrollBarWidth, this.selectionHeight);
                 this.croppedCanvas = document.createElement("canvas");
                 this.croppedCanvas.height = this.selectionHeight;
-                this.croppedCanvas.width = this.selectionWidth;
+                this.croppedCanvas.width = this.selectionWidth + scrollBarWidth;
                 this.croppedCanvas.getContext("2d", {willReadFrequently: true}).putImageData(imageData, 0, 0);
                 selectionContent.innerHTML = "";
                 selectionContent.appendChild(this.croppedCanvas);
@@ -490,6 +491,15 @@ export default {
 </style>
 
 <style lang="scss">
+#annotatorSvg {
+  height: 100% !important;
+  width: 100% !important;
+}
+.annotator__wrapper {
+  height: fit-content;
+  width: fit-content;
+  margin: 0 auto;
+}
 details {
   border-radius: 0 0 8px 8px;
 }
@@ -499,6 +509,8 @@ details {
 summary {
   text-align: center;
   padding: 0 0 6px 0;
+  width: 100% !important;
+  margin: 0 auto;
 }
 .hide-shape {
   display: none;
