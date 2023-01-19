@@ -1,6 +1,6 @@
 {
   "name": "wc-svg-annotator",
-  "version": "0.2.3",
+  "version": "0.2.5",
   "description": "A web component you can use to select and annotate any web content",
   "author": {
     "name": "Alec Lloyd Probert"
@@ -33,7 +33,7 @@
     "core-js": "^3.6.5",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
-    "svg-annotator": "^0.4.3",
+    "svg-annotator": "^0.4.4",
     "vue": "^2.6.11"
   },
   "devDependencies": {

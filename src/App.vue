@@ -110,6 +110,10 @@ export default {
         type: Boolean,
         default: true,
       },
+      translationAutoOrientation: {
+        type: String,
+        default: "auto print orientation"
+      },
       translationColor: {
         type: String,
         default: "Color"
@@ -204,6 +208,7 @@ export default {
             selectionHeight: 0,
             croppedCanvas: null,
             translations: {
+              autoOrientation: this.translationAutoOrientation,
               color: this.translationColor,
               colorAlpha: this.translationColorAlpha,
               dashedLines: this.translationDashedLines,

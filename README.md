@@ -45,6 +45,7 @@ Place the web component on the desired page:
 | icon-color | Color of the icons and borders of the annotator buttons | "#4a4a4a" | - |
 | show-print | Enable / Disable pdf functionality | true | true, false |
 | show-tooltips | Show / Hide tooltips | true | true, false |
+| translation-auto-orientation | Label for the auto print orientation checkbox | "auto print orientation" | - |
 | translation-color | Label for the color picker input | "Color" | - |
 | translation-color-alpha | Label for the color alpha slider input | "Color alpha" | - |
 | translation-dashed-lines | Label for the dashed lines checkbox | "Dashed lines" | - |
@@ -78,6 +79,7 @@ If you don't add props, these will be used by default:
     icon-color="#4a4a4a"
     show-print="true"
     show-tooltips="true"
+    translation-auto-orientation="auto print orientation"
     translation-color="Color"
     translation-color-alpha="Color alpha"
     translation-dashed-lines="Dashed lines"

@@ -45,6 +45,11 @@ const myComponentAttributes = [
     isEnabled: true,
   },
   {
+    key: "translationAutoOrientation",
+    value: "auto print orientation",
+    enbaled: true,
+  },
+  {
     key: "translationColor",
     value: "Color",
     enbaled: true,
